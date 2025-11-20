@@ -1,0 +1,5 @@
+{
+  "name": "Neural Dither AI",
+  "description": "A high-end, shader-driven landing page for an AI company featuring WebGL dithering effects and Gemini integration.",
+  "requestFramePermissions": []
+}
