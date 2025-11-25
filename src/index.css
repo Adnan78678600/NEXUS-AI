@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: 'Space Grotesk', sans-serif;
+  --font-family-mono: 'Space Mono', monospace;
+  --color-cyber-green: #00ff9f;
+  --color-cyber-purple: #d400ff;
+  --color-cyber-blue: #00a2ff;
+  --color-cyber-orange: #ff3c00;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #050505;
+  color: #e0e0e0;
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Hide scrollbar for clean look */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.mono {
+  font-family: 'Space Mono', monospace;
+}
+
+/* Stroke text effect */
+.stroke-text {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+  color: transparent;
+}
+
+.stroke-text:hover {
+  -webkit-text-stroke: 1px #fff;
+}
+
+@media (min-width: 768px) {
+  .stroke-text {
+    -webkit-text-stroke: 2px rgba(255,255,255,0.5);
+  }
+  .stroke-text:hover {
+    -webkit-text-stroke: 2px #fff;
+  }
+}
+
+/* Focus visible styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-cyber-green);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-cyber-green);
+  outline-offset: 2px;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.sr-only:focus-within {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Improved contrast for text */
+.text-neutral-500 {
+  color: rgb(163 163 163); /* Bumped from #737373 for better contrast */
+}
+
+.text-neutral-400 {
+  color: rgb(180 180 180); /* Improved contrast */
+}
+
+/* Animation utilities */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(1rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fade-in 0.5s ease-out, slide-in-from-bottom 0.5s ease-out;
+}
+
+.fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce,
+  .animate-ping {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .border-white\/10,
+  .border-white\/20 {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .text-neutral-500,
+  .text-neutral-400,
+  .text-neutral-600 {
+    color: rgb(200, 200, 200);
+  }
+  
+  .opacity-50,
+  .opacity-60,
+  .opacity-70 {
+    opacity: 0.9;
+  }
+}
+
+/* Print styles */
+@media print {
+  .fixed,
+  .absolute {
+    position: static;
+  }
+  
+  canvas {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { shaderMaterial } from '@react-three/drei';
 import { extend } from '@react-three/fiber';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 // -----------------------------------------------------------------------------
 // SHADER DEFINITIONS
