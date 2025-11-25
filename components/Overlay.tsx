@@ -188,9 +188,9 @@ const Overlay = () => {
               </div>
 
               <div className="font-mono text-[10px] text-neutral-500 space-y-2 border-l border-white/10 pl-6 hidden md:block">
-                 <div className="flex justify-between"><span>> KERNEL_VERSION</span> <span className="text-white">5.19.0-42-generic</span></div>
-                 <div className="flex justify-between"><span>> RENDER_BACKEND</span> <span className="text-white">WEBGL2_COMPUTE</span></div>
-                 <div className="flex justify-between"><span>> NEURAL_LINKS</span> <span className="text-green-500">ESTABLISHED</span></div>
+                 <div className="flex justify-between"><span>&gt; KERNEL_VERSION</span> <span className="text-white">5.19.0-42-generic</span></div>
+                 <div className="flex justify-between"><span>&gt; RENDER_BACKEND</span> <span className="text-white">WEBGL2_COMPUTE</span></div>
+                 <div className="flex justify-between"><span>&gt; NEURAL_LINKS</span> <span className="text-green-500">ESTABLISHED</span></div>
                  <div className="mt-4 p-2 bg-black/50 border border-white/5 text-green-400/70 h-20 overflow-hidden">
                     // BOOT_SEQ<br/>
                     loading_modules... OK<br/>

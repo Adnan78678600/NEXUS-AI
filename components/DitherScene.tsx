@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect } from 'react';
+import React, { useRef, useMemo, useEffect, useLayoutEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Box, ScrollControls, Scroll, useScroll, Stars, Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -119,6 +119,20 @@ const SceneContent = () => {
   
   // Track previous pointer for velocity calculation
   const prevPointer = useRef(new THREE.Vector2());
+
+  // Reset scroll to top on mount using requestAnimationFrame to catch drei's timing
+  useLayoutEffect(() => {
+    const resetScroll = () => {
+      if (scroll.el) {
+        scroll.el.scrollTop = 0;
+      }
+    };
+    // Use RAF to run after drei's internal setup
+    requestAnimationFrame(() => {
+      resetScroll();
+      requestAnimationFrame(resetScroll);
+    });
+  }, []);
 
   // Pre-allocate colors for 5-stage smooth transitions
   const colors = useMemo(() => ({
@@ -264,14 +278,51 @@ const SceneContent = () => {
 };
 
 const DitherScene = () => {
+  const [mountKey] = useState(() => Date.now());
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    // Use MutationObserver to catch when drei creates its scroll container
+    if (!containerRef.current) return;
+    
+    const resetScrollElements = () => {
+      const scrollContainers = containerRef.current?.querySelectorAll('div[style*="overflow"]');
+      scrollContainers?.forEach((el) => {
+        (el as HTMLElement).scrollTop = 0;
+      });
+    };
+
+    // Initial reset
+    resetScrollElements();
+
+    // Watch for DOM changes and reset scroll when drei adds its elements
+    const observer = new MutationObserver(() => {
+      resetScrollElements();
+    });
+
+    observer.observe(containerRef.current, { childList: true, subtree: true });
+
+    // Also reset after delays to catch any async initialization
+    const t1 = setTimeout(resetScrollElements, 0);
+    const t2 = setTimeout(resetScrollElements, 100);
+    const t3 = setTimeout(resetScrollElements, 300);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, []);
+
   return (
-    <div className="absolute inset-0 z-0 bg-black">
+    <div ref={containerRef} className="absolute inset-0 z-0 bg-black">
       <Canvas 
         camera={{ position: [0, 0, 6], fov: 40 }}
         dpr={[1, 2]} 
         gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
       >
-        <ScrollControls pages={5} damping={0.15}>
+        <ScrollControls key={mountKey} pages={5} damping={0.15}>
           <SceneContent />
           {/* Explicitly set width/height to prevent collapse in some browsers */}
           <Scroll html style={{ width: '100vw', height: '100vh' }}>
