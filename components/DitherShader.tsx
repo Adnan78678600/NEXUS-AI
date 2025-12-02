@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { shaderMaterial } from '@react-three/drei';
 import { extend } from '@react-three/fiber';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 // -----------------------------------------------------------------------------
 // SHADER DEFINITIONS
@@ -129,7 +129,7 @@ export type DitherMaterialProps = {
   uMouse?: THREE.Vector2;
   uColor1?: THREE.Color;
   uColor2?: THREE.Color;
-} & { [key: string]: any };
+} & React.JSX.IntrinsicElements['shaderMaterial'];
 
 export const DitherMaterial = forwardRef<THREE.ShaderMaterial, DitherMaterialProps>((props, ref) => {
   // @ts-ignore - R3F catalog type issue workaround

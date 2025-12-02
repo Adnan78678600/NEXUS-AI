@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import { FadeIn } from './FadeIn';
 
 describe('FadeIn', () => {
@@ -78,10 +78,12 @@ describe('FadeIn', () => {
         time: Date.now(),
       };
       
-      intersectionCallback(
-        [mockEntry as IntersectionObserverEntry],
-        {} as IntersectionObserver
-      );
+      act(() => {
+        intersectionCallback!(
+          [mockEntry as IntersectionObserverEntry],
+          {} as IntersectionObserver
+        );
+      });
     }
 
     await waitFor(() => {
