@@ -1,10 +1,36 @@
 <div align="center">
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+
+# NEXUS AI
+
+**Cyberpunk-themed interactive web experience with 3D shader visualizations and AI-powered terminal**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-repo/neural-dither-ai)
+
 </div>
 
-# Neural Dither AI
+## Features
 
-Advanced digital rendering and neural processing visualization built with React, Three.js, and Gemini AI.
+- **3D Dithered Shader Cube** - Dynamic WebGL visualization with custom GLSL shaders and smooth color transitions
+- **Scroll-Driven Experience** - 5 immersive sections (Hero, Identity, Grid, Metrics, Terminal) with parallax animations
+- **AI-Powered Terminal** - Interactive command interface powered by Google Gemini for cyberpunk-style responses
+- **Procedural Audio** - Reactive sound system that responds to scroll position and mouse movement
+- **Particle Star Field** - Animated cosmic background with 5000+ stars
+- **Responsive Design** - Fully optimized for desktop and mobile devices
+
+## Tech Stack
+
+| Category | Technologies |
+|----------|-------------|
+| **Frontend** | React 19, TypeScript, Tailwind CSS |
+| **3D Graphics** | Three.js, React Three Fiber, Drei |
+| **AI** | Google Gemini API |
+| **State** | Zustand |
+| **Animations** | GSAP, CSS Transitions |
+| **Icons** | Lucide React |
+| **Build** | Vite |
+| **Testing** | Vitest, Playwright |
+| **Monitoring** | Sentry |
 
 ## Quick Start
 
@@ -39,18 +65,34 @@ npm run dev
 
 ## Environment Variables
 
-Copy `.env.example` to `.env.local` and configure:
-
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google Gemini API key |
+| `GEMINI_API_KEY` | Yes | Google Gemini API key for AI features |
 | `VITE_SENTRY_DSN` | No | Sentry DSN for error monitoring |
+
+## Architecture
+
+```
+├── components/
+│   ├── sections/        # Page sections (Hero, Identity, Grid, Metrics, Terminal)
+│   ├── ui/              # Reusable UI components
+│   ├── DitherScene.tsx  # Main 3D canvas with scroll controls
+│   ├── DitherShader.tsx # Custom GLSL shader material
+│   └── Navbar.tsx       # Navigation component
+├── hooks/
+│   └── useProceduralAudio.ts  # Reactive audio system
+├── services/
+│   └── gemini.ts        # Gemini AI integration
+├── stores/
+│   └── useAppStore.ts   # Zustand state management
+├── src/
+│   └── lib/             # Utilities (config, rate limiting, Sentry)
+└── e2e/                 # Playwright E2E tests
+```
 
 ## Deployment
 
 ### Vercel (Recommended)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-repo/neural-dither-ai)
 
 1. Push to GitHub
 2. Import to Vercel
@@ -60,42 +102,16 @@ Copy `.env.example` to `.env.local` and configure:
 ### Docker
 
 ```bash
-# Build image
-docker build -t neural-dither-ai .
-
-# Run container
-docker run -p 80:80 neural-dither-ai
+docker build -t nexus-ai .
+docker run -p 80:80 nexus-ai
 ```
 
-### Manual Build
+### Manual
 
 ```bash
 npm run build
-# Serve the `dist` folder with any static file server
+# Serve the dist folder with any static file server
 ```
-
-## Architecture
-
-```
-├── components/       # React components
-│   ├── sections/     # Page sections
-│   └── ui/           # Reusable UI components
-├── hooks/            # Custom React hooks
-├── services/         # API services (Gemini)
-├── stores/           # Zustand state management
-├── src/
-│   └── lib/          # Utilities (config, rate limiting, Sentry)
-└── e2e/              # Playwright E2E tests
-```
-
-## Tech Stack
-
-- **Frontend:** React 19, TypeScript, Tailwind CSS
-- **3D:** Three.js, React Three Fiber, Drei
-- **State:** Zustand
-- **AI:** Google Gemini API
-- **Testing:** Vitest, Playwright
-- **Build:** Vite
 
 ## License
 
